@@ -1,5 +1,3 @@
-export const name: string = 'kamila';
-
 export type Product = {
   id: number;
   codigo: string;
@@ -11,4 +9,8 @@ export type Product = {
   rating: number;
   numReviews: number;
   isFeatured: boolean;
+};
+
+export type ThemeProps = {
+  children: JSX.Element;
 };

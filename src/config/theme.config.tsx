@@ -6,7 +6,7 @@ import { ThemeProps } from '../types/index';
 enum ThemePalette {
   BG = '#b1ff52',
   LIME = '#0EECE4',
-  FONT = 'jetBrains Mono, monospace',
+  FONT_GLOBAL = 'jetBrains Mono, monospace',
 }
 
 export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
@@ -21,7 +21,7 @@ export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
       },
     },
     typography: {
-      fontFamily: ThemePalette.FONT,
+      fontFamily: ThemePalette.FONT_GLOBAL,
     },
     components: {
       MuiButton: {

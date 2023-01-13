@@ -38,3 +38,8 @@ enum IGenter {
 }
 
 type ISizes = 'xs' | 's' | 'm' | 'l' | 'xl';
+
+export type LoginType = {
+  email: string;
+  password: string;
+};

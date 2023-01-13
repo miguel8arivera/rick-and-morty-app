@@ -9,8 +9,8 @@ export const AppRouter: FC = function () {
     <Routes>
       <Route path="/" element={<RouterLayout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
       </Route>
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/user" element={<div>Hello</div>} />
     </Routes>
   );

@@ -7,6 +7,8 @@ enum ThemePalette {
   BG = '#b1ff52',
   LIME = '#0EECE4',
   FONT_GLOBAL = 'jetBrains Mono, monospace',
+  ERROR_MAIN = '#f44336',
+  BG_ERROR_MAIN = 'rgda(244,67,54,0.1)',
 }
 
 export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
@@ -31,6 +33,20 @@ export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
             boxShadow: 'none',
             borderRadius: '0.5em',
             margin: '0.5em',
+          },
+        },
+      },
+      MuiAlert: {
+        defaultProps: {
+          style: {
+            borderRadius: '0.8em',
+            fontSize: '1.2em',
+          },
+        },
+        styleOverrides: {
+          standardError: {
+            border: `1px solid ${ThemePalette.ERROR_MAIN}`,
+            backgroundColor: ThemePalette.BG_ERROR_MAIN,
           },
         },
       },

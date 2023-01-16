@@ -43,3 +43,11 @@ export type LoginType = {
   email: string;
   password: string;
 };
+
+export type RegisterType = {
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+};

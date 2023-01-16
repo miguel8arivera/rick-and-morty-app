@@ -63,6 +63,7 @@ export const LoginPage: FC = function () {
                 fullWidth
                 name="email"
                 onChange={handleLogin}
+                type={'email'}
               />
               <TextField
                 margin="normal"

@@ -9,6 +9,8 @@ enum ThemePalette {
   FONT_GLOBAL = 'jetBrains Mono, monospace',
   ERROR_MAIN = '#f44336',
   BG_ERROR_MAIN = 'rgda(244,67,54,0.1)',
+  SUCCESS_MAIN = '#66bb6a',
+  BG_SUCCESS_MAIN = 'rgba(102,187,106,0.1)',
 }
 
 export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
@@ -47,6 +49,10 @@ export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
           standardError: {
             border: `1px solid ${ThemePalette.ERROR_MAIN}`,
             backgroundColor: ThemePalette.BG_ERROR_MAIN,
+          },
+          standardSuccess: {
+            border: `1px solid ${ThemePalette.SUCCESS_MAIN}`,
+            backgroundColor: ThemePalette.BG_SUCCESS_MAIN,
           },
         },
       },

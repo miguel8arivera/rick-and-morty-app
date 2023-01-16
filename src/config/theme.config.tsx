@@ -11,6 +11,7 @@ enum ThemePalette {
   BG_ERROR_MAIN = 'rgda(244,67,54,0.1)',
   SUCCESS_MAIN = '#66bb6a',
   BG_SUCCESS_MAIN = 'rgba(102,187,106,0.1)',
+  COLOR_FONT_MAIN = '#000000',
 }
 
 export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
@@ -53,6 +54,7 @@ export const ThemeConfig: FC<ThemeProps> = function ({ children }) {
           standardSuccess: {
             border: `1px solid ${ThemePalette.SUCCESS_MAIN}`,
             backgroundColor: ThemePalette.BG_SUCCESS_MAIN,
+            color: ThemePalette.COLOR_FONT_MAIN,
           },
         },
       },

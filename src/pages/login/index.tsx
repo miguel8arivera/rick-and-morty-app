@@ -9,13 +9,16 @@ import {
   Stack,
 } from '@mui/material';
 import { FC, useState } from 'react';
+import { useNotification } from '../../context/notificatin.context';
 import { LoginType } from '../../types/index';
+import { validateLoginForm } from '../../utils/validateForm';
 
 const initialState = {
   email: '',
   password: '',
 };
 export const LoginPage: FC = function () {
+  const { getError, getSuccess } = useNotification();
   const [loginData, setLoginData] = useState<LoginType>(initialState);
 
   const handleLogin = (
@@ -28,7 +31,14 @@ export const LoginPage: FC = function () {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginData);
+    validateLoginForm
+      .validate(loginData)
+      .then(() => {
+        getSuccess(JSON.stringify(loginData));
+      })
+      .catch((err) => {
+        getError(err.message);
+      });
   };
 
   return (
@@ -51,7 +61,6 @@ export const LoginPage: FC = function () {
                 label="Email"
                 sx={{ mt: 2, mb: 1.5 }}
                 fullWidth
-                required
                 name="email"
                 onChange={handleLogin}
               />
@@ -61,7 +70,6 @@ export const LoginPage: FC = function () {
                 type={'password'}
                 sx={{ mt: 1.5, mb: 1.5 }}
                 fullWidth
-                required
                 name="password"
                 onChange={handleLogin}
               />

@@ -15,7 +15,7 @@ export const NavBar: FC = function () {
   const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBar position="sticky">
         <Toolbar>
           <Container>
             <Grid

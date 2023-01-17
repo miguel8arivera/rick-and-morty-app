@@ -31,24 +31,22 @@ export const HearderComponent: FC<HeaderComponentProps> = function ({
               sx={{ height: '100%' }}
             >
               <Grid item>
-                <Typography color={'indigo'} variant={'h3'}>
-                  {tittle}
-                </Typography>
+                <Typography variant={'h3'}>{tittle}</Typography>
               </Grid>
               <Grid sx={{ mt: 2 }} item>
-                <Typography color={'indigo'} variant={'h6'}>
-                  {description}
-                </Typography>
+                <Typography variant={'h6'}>{description}</Typography>
               </Grid>
               {element !== undefined && (
-                <Grid sx={{ mt: 4, width: '100%' }}>{element}</Grid>
+                <Grid sx={{ mt: 4, width: '100%' }} item>
+                  {element}
+                </Grid>
               )}
             </Grid>
           </Grid>
         </Grid>
       </Box>
 
-      <Divider variant="middle" />
+      <Divider />
     </div>
   );
 };

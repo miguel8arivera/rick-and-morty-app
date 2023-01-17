@@ -4,14 +4,14 @@ import { FC } from 'react';
 import { ThemeProps } from '../types/index';
 
 enum ThemePalette {
-  BG = '#b1ff52',
+  BG = '#252524',
   LIME = '#0EECE4',
   FONT_GLOBAL = 'jetBrains Mono, monospace',
   ERROR_MAIN = '#f44336',
   BG_ERROR_MAIN = 'rgda(244,67,54,0.1)',
   SUCCESS_MAIN = '#66bb6a',
   BG_SUCCESS_MAIN = 'rgba(102,187,106,0.1)',
-  COLOR_FONT_MAIN = '#000000',
+  COLOR_FONT_MAIN = '#f1e9e9',
 }
 
 export const ThemeConfig: FC<ThemeProps> = function ({ children }) {

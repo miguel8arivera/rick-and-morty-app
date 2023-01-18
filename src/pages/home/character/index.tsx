@@ -1,4 +1,14 @@
-import { Box, Button, CircularProgress, Container, Grid } from '@mui/material';
+import {
+  Box,
+  Button,
+  Chip,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from '@mui/material';
+import Divider from '@mui/material/Divider';
+import { margin } from '@mui/system';
 import React, { FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCharacters } from '../../../api/characters';
@@ -44,7 +54,37 @@ export const CharacterHome: FC = function () {
         ) : (
           <Grid sx={{ mt: 4 }} container columnSpacing={2}>
             <Grid item xs={6}>
-              Miguel
+              <Typography sx={{ mt: 2, mb: 2 }} variant={'h3'}>
+                Description :
+              </Typography>
+              <Divider />
+              <Typography sx={{ mt: 2, mb: 2 }}>
+                <b>Name:</b> {character?.name}
+              </Typography>
+
+              <Box sx={{ mt: 2, mb: 2 }}>
+                <Chip
+                  color="primary"
+                  variant="outlined"
+                  label={character?.status}
+                />
+              </Box>
+
+              <Typography sx={{ mt: 2, mb: 2 }}>
+                <b>species: {character?.species}</b>
+              </Typography>
+              <Typography sx={{ mt: 2, mb: 2 }}>
+                <b>gender: {character?.gender}</b>
+              </Typography>
+              <Typography sx={{ mt: 2, mb: 2 }}>
+                <b>origin: {character?.origin.name}</b>
+              </Typography>
+              <Typography sx={{ mt: 2, mb: 2 }}>
+                <b>location: {character?.location.name} - </b>
+              </Typography>
+              <Typography sx={{ mt: 2, mb: 2 }}>
+                <b>gender: {character?.gender}</b>
+              </Typography>
             </Grid>
             <Grid item xs={6}>
               <img

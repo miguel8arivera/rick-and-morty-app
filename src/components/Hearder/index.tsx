@@ -2,8 +2,8 @@ import { Box, Divider, Grid, Typography } from '@mui/material';
 import { FC } from 'react';
 
 type HeaderComponentProps = {
-  tittle: string;
-  description: string;
+  tittle?: string;
+  description?: string;
   element?: React.ReactNode | null;
 };
 
@@ -14,7 +14,7 @@ export const HearderComponent: FC<HeaderComponentProps> = function ({
 }) {
   return (
     <div>
-      <Box sx={{ width: '100%', height: '350px' }}>
+      <Box sx={{ width: '100%', height: '100px' }}>
         <Grid
           container
           direction={'row'}

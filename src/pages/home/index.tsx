@@ -1,4 +1,13 @@
-import { Container, Button, Box, Grid } from '@mui/material';
+import {
+  Container,
+  Button,
+  Box,
+  Grid,
+  CircularProgress,
+  Pagination,
+} from '@mui/material';
+import Stack from '@mui/material/Stack';
+import React from 'react';
 import { FC, useEffect, useState } from 'react';
 import { getCharacters } from '../../api/characters';
 import { CardComponent, HearderComponent } from '../../components';
@@ -8,45 +17,70 @@ export const HomePage: FC<{}> = function () {
   const [allCharacters, setAllCharacters] = useState<TypeCharacter[] | null>(
     null
   );
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [page, setPage] = React.useState<number>(1);
+  const [totalPages, setTotalPages] = React.useState<number>(1);
+
+  const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
   useEffect(() => {
+    setLoading(true);
     getCharacters
-      .getAll({ page: 1 })
+      .getAll({ page: page })
       .then((res) => {
+        setTotalPages(res.data.info.pages);
+
         const { data } = res;
         setAllCharacters(data.results);
+        setTimeout(() => setLoading(false), 1000);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [page]);
 
   return (
-    <Container maxWidth="xl">
-      <HearderComponent
-        tittle="This  Home page"
-        description="Welcome to Home page"
-        element={
-          <Button fullWidth variant="contained">
-            Contact me
-          </Button>
-        }
-      />
-      {allCharacters?.length !== 0 ? (
-        <Grid container spacing={2} direction={'row'}>
-          {allCharacters?.map((character) => (
-            <Grid item xs={3}>
-              <CardComponent
-                key={character.id}
-                image={character.image}
-                name={character.name}
-                especies={character.species}
-                status={character.status}
-              />
-            </Grid>
-          ))}
-        </Grid>
+    <Container sx={{ my: -2 }} maxWidth="xl">
+      <HearderComponent description="This app the rick and morty" />
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+          <CircularProgress />
+        </Box>
       ) : (
-        ''
+        <div>
+          {allCharacters?.length !== 0 ? (
+            <Grid sx={{ my: 2 }} container spacing={2} direction={'row'}>
+              {allCharacters?.map((character) => (
+                <Grid item xs={3}>
+                  <CardComponent
+                    key={character.id}
+                    image={character.image}
+                    name={character.name}
+                    especies={character.species}
+                    status={character.status}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            ''
+          )}
+          <Box
+            sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          >
+            <Pagination
+              variant="outlined"
+              shape="rounded"
+              color="primary"
+              size="medium"
+              count={totalPages}
+              page={page}
+              onChange={handleChange}
+              sx={{ mt: 2, mb: 2 }}
+            />
+          </Box>
+        </div>
       )}
     </Container>
   );

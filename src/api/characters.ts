@@ -10,7 +10,7 @@ export const getCharacters = {
       },
     });
   },
-  getOneId: ({ id }: { id: number }) => {
+  getOneId: ({ id }: { id: string | undefined }) => {
     return instance.get(`${endpoint}/${id}`);
   },
 };

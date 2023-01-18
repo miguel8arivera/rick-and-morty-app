@@ -17,3 +17,5 @@ export interface Location {
   name: string;
   url: string;
 }
+
+export interface IdCharacters extends TypeCharacter {}

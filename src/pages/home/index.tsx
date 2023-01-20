@@ -59,6 +59,7 @@ export const HomePage: FC<{}> = function () {
                     name={character.name}
                     especies={character.species}
                     status={character.status}
+                    id={character.id}
                   />
                 </Grid>
               ))}

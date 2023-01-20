@@ -8,12 +8,14 @@ import {
   Typography,
 } from '@mui/material';
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type CardComponentProps = {
   image: string;
   name: string;
   especies: string;
   status: string;
+  id: number;
 };
 
 export const CardComponent: FC<CardComponentProps> = function ({
@@ -21,7 +23,10 @@ export const CardComponent: FC<CardComponentProps> = function ({
   name,
   especies,
   status,
+  id,
 }) {
+  const navigate = useNavigate();
+
   return (
     <>
       <Card>
@@ -46,7 +51,12 @@ export const CardComponent: FC<CardComponentProps> = function ({
         </CardContent>
 
         <CardActions>
-          <Button fullWidth variant="contained" size="small">
+          <Button
+            onClick={() => navigate(`/character/${id}`)}
+            fullWidth
+            variant="contained"
+            size="small"
+          >
             See more
           </Button>
         </CardActions>

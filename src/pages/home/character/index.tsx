@@ -63,7 +63,9 @@ export const CharacterHome: FC = function () {
               </Typography>
 
               <Box sx={{ mt: 2, mb: 2 }}>
+                status:
                 <Chip
+                  sx={{ ml: 2 }}
                   color="primary"
                   variant="outlined"
                   label={character?.status}

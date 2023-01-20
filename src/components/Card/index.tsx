@@ -59,6 +59,9 @@ export const CardComponent: FC<CardComponentProps> = function ({
           >
             See more
           </Button>
+          <Button fullWidth variant="contained" size="small">
+            like
+          </Button>
         </CardActions>
       </Card>
     </>

@@ -2,14 +2,14 @@ import { FC } from 'react';
 
 type CardHorizontalProps = {
   id: number;
-  img: string;
+  image: string;
   name: string;
   info: string;
 };
 
 export const CardHorizontal: FC<CardHorizontalProps> = function ({
   id,
-  img,
+  image,
   name,
   info,
 }) {

@@ -7,8 +7,11 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { addToCar } from '../../app/features/cart/cart.Slice';
+import { useAppSelector } from '../../app/hooks';
 
 type CardComponentProps = {
   image: string;
@@ -25,7 +28,31 @@ export const CardComponent: FC<CardComponentProps> = function ({
   status,
   id,
 }) {
+  const [disabledBtn, setDisableBtn] = useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const exitItem = useAppSelector((state) => state.cartReducer);
+
+  useEffect(() => {
+    // otra forma de hacerlo
+    // setDisableBtn(exitItem.some((item) => item.id === id));
+
+    exitItem.some((item) => item.id === id)
+      ? setDisableBtn(true)
+      : setDisableBtn(false);
+  }, [exitItem, id]);
+
+  const handleAddfavorites = () => {
+    dispatch(
+      addToCar({
+        id,
+        name,
+        image,
+        info: status,
+      })
+    );
+  };
 
   return (
     <>
@@ -59,8 +86,14 @@ export const CardComponent: FC<CardComponentProps> = function ({
           >
             See more
           </Button>
-          <Button fullWidth variant="contained" size="small">
-            like
+          <Button
+            onClick={handleAddfavorites}
+            fullWidth
+            variant="contained"
+            size="small"
+            disabled={disabledBtn}
+          >
+            Add favorites
           </Button>
         </CardActions>
       </Card>

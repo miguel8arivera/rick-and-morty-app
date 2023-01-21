@@ -8,26 +8,38 @@ import {
   TextField,
   Stack,
 } from '@mui/material';
-import { useFormik } from 'formik';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useNotification } from '../../context/notificatin.context';
-import { LoginType } from '../../types';
+import { LoginType } from '../../types/index';
 import { validateLoginForm } from '../../utils/validateForm';
 
 const initialState = {
   email: '',
   password: '',
 };
-export const LoginPage: FC = function () {
-  const { getSuccess } = useNotification();
+export const TradicionalFormValidation: FC = function () {
+  const { getError, getSuccess } = useNotification();
+  const [loginData, setLoginData] = useState<LoginType>(initialState);
 
-  const formik = useFormik<LoginType>({
-    initialValues: initialState,
-    validationSchema: validateLoginForm,
-    onSubmit: (values: LoginType) => {
-      getSuccess(JSON.stringify(values));
-    },
-  });
+  const handleLogin = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setLoginData({ ...loginData, [name]: value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    validateLoginForm
+      .validate(loginData)
+      .then(() => {
+        getSuccess(JSON.stringify(loginData));
+      })
+      .catch((err) => {
+        getError(err.message);
+      });
+  };
 
   return (
     <Container maxWidth={'sm'}>
@@ -43,16 +55,14 @@ export const LoginPage: FC = function () {
             <Typography margin={2} textAlign="center" variant="h4">
               Login
             </Typography>
-            <Box noValidate component={'form'} onSubmit={formik.handleSubmit}>
+            <Box component={'form'} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 label="Email"
                 sx={{ mt: 2, mb: 1.5 }}
                 fullWidth
                 name="email"
-                onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                onChange={handleLogin}
                 type={'email'}
               />
               <TextField
@@ -62,11 +72,7 @@ export const LoginPage: FC = function () {
                 sx={{ mt: 1.5, mb: 1.5 }}
                 fullWidth
                 name="password"
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.password && Boolean(formik.errors.password)
-                }
-                helperText={formik.touched.password && formik.errors.password}
+                onChange={handleLogin}
               />
 
               <Stack direction="row" spacing={2} sx={{ mt: 1.5 }}>

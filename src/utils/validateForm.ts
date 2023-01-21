@@ -8,7 +8,12 @@ export const validateLoginForm = yup.object().shape({
     .trim()
     .email()
     .required('Email is required'),
-  password: yup.string().max(50).min(8).trim().required('Password is required'),
+  password: yup
+    .string()
+    .max(20, 'max 20 character')
+    .min(8, 'min 8 character')
+    .trim()
+    .required('Password is required'),
 });
 
 export const validateRegisterForm = yup.object().shape({

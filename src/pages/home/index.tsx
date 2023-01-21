@@ -6,7 +6,6 @@ import {
   CircularProgress,
   Pagination,
 } from '@mui/material';
-import Stack from '@mui/material/Stack';
 import React from 'react';
 import { FC, useEffect, useState } from 'react';
 import { getCharacters } from '../../api/characters';

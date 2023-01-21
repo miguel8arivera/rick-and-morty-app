@@ -22,7 +22,7 @@ const initialState = {
   repeatPassword: '',
 };
 
-export const RegisterPage: FC = function () {
+const RegisterPage: FC = function () {
   const { getSuccess } = useNotification();
   const msgSucces: string = 'Register success';
 
@@ -135,3 +135,4 @@ export const RegisterPage: FC = function () {
     </Container>
   );
 };
+export default RegisterPage;

@@ -18,7 +18,7 @@ const initialState = {
   email: '',
   password: '',
 };
-export const LoginPage: FC = function () {
+const LoginPage: FC = function () {
   const { getSuccess } = useNotification();
 
   const formik = useFormik<LoginType>({
@@ -83,3 +83,5 @@ export const LoginPage: FC = function () {
     </Container>
   );
 };
+
+export default LoginPage;

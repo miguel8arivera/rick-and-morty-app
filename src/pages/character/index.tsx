@@ -8,13 +8,12 @@ import {
   Typography,
 } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import { margin } from '@mui/system';
 import React, { FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCharacters } from '../../../api/characters';
-import { IdCharacters } from '../interface/character.interface';
+import { getCharacters } from '../../api/characters';
+import { IdCharacters } from '../home/interface/character.interface';
 
-export const CharacterHome: FC = function () {
+const CharacterPage: FC = function () {
   const { characterId } = useParams();
   const navigate = useNavigate();
 
@@ -100,3 +99,4 @@ export const CharacterHome: FC = function () {
     </Box>
   );
 };
+export default CharacterPage;

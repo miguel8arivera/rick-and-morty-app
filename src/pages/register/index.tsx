@@ -8,7 +8,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import { useFormik } from 'formik';
+import { FC } from 'react';
 import { useNotification } from '../../context/notificatin.context';
 import { RegisterType } from '../../types/index';
 import { validateRegisterForm } from '../../utils/validateForm';
@@ -22,28 +23,17 @@ const initialState = {
 };
 
 export const RegisterPage: FC = function () {
-  const { getError, getSuccess } = useNotification();
-  const [registerData, setRegisterData] = useState<RegisterType>(initialState);
+  const { getSuccess } = useNotification();
+  const msgSucces: string = 'Register success';
 
-  const handleRegister = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
+  const formik = useFormik<RegisterType>({
+    initialValues: initialState,
+    validationSchema: validateRegisterForm,
+    onSubmit: (values: RegisterType) => {
+      getSuccess(JSON.stringify(msgSucces));
+    },
+  });
 
-    setRegisterData({ ...registerData, [name]: value });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    validateRegisterForm
-      .validate(registerData)
-      .then(() => {
-        getSuccess(JSON.stringify(registerData));
-      })
-      .catch((err) => {
-        getError(err.message);
-      });
-  };
   return (
     <Container sx={{ mt: 4, mb: 2 }} maxWidth={'sm'}>
       <Grid
@@ -58,7 +48,7 @@ export const RegisterPage: FC = function () {
             <Typography margin={2} textAlign={'center'} variant={'h5'}>
               Register
             </Typography>
-            <Box component={'form'} onSubmit={handleSubmit}>
+            <Box noValidate component={'form'} onSubmit={formik.handleSubmit}>
               <TextField
                 sx={{ mt: 2, mb: 1.5 }}
                 margin={'normal'}
@@ -66,7 +56,10 @@ export const RegisterPage: FC = function () {
                 type={'text'}
                 fullWidth
                 name="name"
-                onChange={handleRegister}
+                value={formik.values.name}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+                onChange={formik.handleChange}
               />
               <TextField
                 sx={{ mt: 2, mb: 1.5 }}
@@ -75,7 +68,12 @@ export const RegisterPage: FC = function () {
                 type={'text'}
                 fullWidth
                 name="lastName"
-                onChange={handleRegister}
+                error={
+                  formik.touched.lastName && Boolean(formik.errors.lastName)
+                }
+                helperText={formik.touched.lastName && formik.errors.lastName}
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
               />
               <TextField
                 sx={{ mt: 1.5, mb: 1.5 }}
@@ -84,7 +82,10 @@ export const RegisterPage: FC = function () {
                 type={'email'}
                 fullWidth
                 name="email"
-                onChange={handleRegister}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                value={formik.values.email}
+                onChange={formik.handleChange}
               />
               <TextField
                 sx={{ mt: 1.5, mb: 1.5 }}
@@ -93,7 +94,12 @@ export const RegisterPage: FC = function () {
                 type={'password'}
                 fullWidth
                 name="password"
-                onChange={handleRegister}
+                value={formik.values.password}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+                onChange={formik.handleChange}
               />
               <TextField
                 sx={{ mt: 2, mb: 1.5 }}
@@ -102,7 +108,15 @@ export const RegisterPage: FC = function () {
                 type={'password'}
                 fullWidth
                 name="repeatPassword"
-                onChange={handleRegister}
+                value={formik.values.repeatPassword}
+                error={
+                  formik.touched.repeatPassword &&
+                  Boolean(formik.errors.repeatPassword)
+                }
+                helperText={
+                  formik.touched.repeatPassword && formik.errors.repeatPassword
+                }
+                onChange={formik.handleChange}
               />
               <Stack direction={'row'} spacing={2} sx={{ mt: 1.5 }}>
                 <Button

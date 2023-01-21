@@ -50,6 +50,7 @@ export const LoginPage: FC = function () {
                 sx={{ mt: 2, mb: 1.5 }}
                 fullWidth
                 name="email"
+                value={formik.values.email}
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
@@ -61,6 +62,7 @@ export const LoginPage: FC = function () {
                 type={'password'}
                 sx={{ mt: 1.5, mb: 1.5 }}
                 fullWidth
+                value={formik.values.password}
                 name="password"
                 onChange={formik.handleChange}
                 error={

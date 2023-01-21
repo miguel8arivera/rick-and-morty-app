@@ -8,10 +8,9 @@ import {
   Typography,
 } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addToCar } from '../../app/features/cart/cart.Slice';
-import { useAppSelector } from '../../app/hooks';
+import { addToCart } from '../../app/features/cart/cart.slice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 type CardComponentProps = {
   image: string;
@@ -30,7 +29,7 @@ export const CardComponent: FC<CardComponentProps> = function ({
 }) {
   const [disabledBtn, setDisableBtn] = useState<boolean>(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const exitItem = useAppSelector((state) => state.cartReducer);
 
@@ -45,7 +44,7 @@ export const CardComponent: FC<CardComponentProps> = function ({
 
   const handleAddfavorites = () => {
     dispatch(
-      addToCar({
+      addToCart({
         id,
         name,
         image,

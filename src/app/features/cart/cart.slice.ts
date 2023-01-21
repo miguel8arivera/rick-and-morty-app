@@ -21,7 +21,7 @@ export const cartSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    addToCar: (state, action: PayloadAction<CarAddtState>) => {
+    addToCart: (state, action: PayloadAction<CarAddtState>) => {
       const { id } = action.payload;
       if (
         state.length === 0 ||
@@ -30,8 +30,13 @@ export const cartSlice = createSlice({
         state.push(action.payload);
       }
     },
-    removeToCar: (state, action: PayloadAction<CardRemoveState>) => {},
+    removeToCart: (state, action: PayloadAction<CardRemoveState>) => {
+      const { id } = action.payload;
+      if (state.some((item) => item.id === id)) {
+        return (state = state.filter((item) => item.id !== id));
+      }
+    },
   },
 });
 
-export const { addToCar, removeToCar } = cartSlice.actions;
+export const { addToCart, removeToCart } = cartSlice.actions;

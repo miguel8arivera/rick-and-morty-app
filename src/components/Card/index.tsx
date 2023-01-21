@@ -11,6 +11,7 @@ import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../app/features/cart/cart.slice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setItem } from '../../utils/localStorage';
 
 type CardComponentProps = {
   image: string;
@@ -40,6 +41,8 @@ export const CardComponent: FC<CardComponentProps> = function ({
     exitItem.some((item) => item.id === id)
       ? setDisableBtn(true)
       : setDisableBtn(false);
+
+    setItem('cart', exitItem);
   }, [exitItem, id]);
 
   const handleAddfavorites = () => {

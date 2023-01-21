@@ -1,3 +1,0 @@
-VERCEL_PROJECT_NAME = dev-01-rick-and-morty-app
-VERCEL_TOKEN = t6LceNnMaNfBQZ0Wv7OGlSlw
-VERCEL_SCOPE = dev-01
